@@ -13,3 +13,11 @@ pnpm dev # 研发
 
 pnpm test # 运行测试
 ```
+
+### 运行 Demo
+
+```bash
+pnpm i
+
+pnpm exp
+```

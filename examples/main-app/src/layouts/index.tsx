@@ -12,7 +12,10 @@ export default function Layout() {
           <Link to="/docs">Docs</Link>
         </li>
         <li>
-          <a href="https://github.com/umijs/umi">Github</a>
+          <Link to="/dynamic/Page1">Dynamic Page1</Link>
+        </li>
+        <li>
+          <Link to="/dynamic/Page2">Dynamic Page2</Link>
         </li>
       </ul>
       <Outlet />

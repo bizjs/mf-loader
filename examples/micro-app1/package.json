@@ -1,0 +1,12 @@
+{
+  "name": "micro-app1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node config/webpack.mf.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

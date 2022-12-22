@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "start": "pnpm dev",
-    "dev": "pnpm --filter fe-portal-api --filter fe-portal-web run dev",
-    "build": "pnpm build",
-    "test": "pnpm test",
-    "exp":"cd examples/main-app && pnpm dev"
+    "dev": "pnpm --filter @bizjs/mf-loader dev",
+    "build": "pnpm --filter @bizjs/mf-loader build",
+    "test": "pnpm --filter @bizjs/mf-loader test",
+    "exp": "cd examples/main-app && pnpm dev",
+    "micro-app1": "cd examples/micro-app1 && pnpm build"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +17,13 @@
   "devDependencies": {
     "@types/debug": "^4.1.7",
     "@types/jest": "^29.2.4",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "fs-extra": "^11.1.0",
     "jest": "^29.3.1",
-    "ts-jest": "^29.0.3"
+    "ts-jest": "^29.0.3",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }

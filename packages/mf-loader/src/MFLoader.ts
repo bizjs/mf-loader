@@ -84,6 +84,15 @@ async function lookupExposedModule<T>(
 /**
  * 初始化版本缓存
  * @param pkgConfig
+ * @example
+ * ```
+ * const pkgConfig = {
+ *  'antd': {
+ *    '4.0.0': 'https://xxxx.com/xxx.js',
+ *    '5.0.0': 'https://xxxx.com/xxx.js'
+ *  }
+ * };
+ * ```
  */
 export function init(pkgConfig: Record<string, Record<string, string>>) {
   Object.keys(pkgConfig).forEach((key) => {
