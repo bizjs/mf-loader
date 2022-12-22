@@ -7,7 +7,8 @@
     "start": "pnpm dev",
     "dev": "pnpm --filter fe-portal-api --filter fe-portal-web run dev",
     "build": "pnpm build",
-    "test": "pnpm test"
+    "test": "pnpm test",
+    "exp":"cd examples/main-app && pnpm dev"
   },
   "keywords": [],
   "author": "",
