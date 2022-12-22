@@ -1,0 +1,19 @@
+{
+  "name": "@bizjs/mf-loader",
+  "version": "0.0.1",
+  "description": "A module federation assets loader",
+  "main": "index.js",
+  "scripts": {
+    "build": "father build",
+    "dev": "father dev --watch",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^4.3.4",
+    "es-semver": "^1.0.1",
+    "father": "^4.1.2"
+  }
+}
