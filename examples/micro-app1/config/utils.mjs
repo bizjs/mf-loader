@@ -30,6 +30,12 @@ export function runWebpack(name, opt) {
       console.log(
         `${name} 构建完毕，err=`,
         err,
+        stat.toJson({
+          all: false,
+          errors: true,
+          errorDetails: true,
+          errorsCount: true,
+        }),
         `耗时${(stat.endTime - stat.startTime) / 1000}s`
       );
       resolve(err);

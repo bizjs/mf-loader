@@ -4,21 +4,25 @@ import ModuleFederationPlugin from 'webpack/lib/container/ModuleFederationPlugin
 const pkgJSON = readJSONSync(root('package.json'));
 
 /**
- * @type {import('webpack').Configuration}
+ * @returns {import('webpack').Configuration}
  */
 export const buildConfig = () => ({
-  entry: root('index.ts'),
+  entry: root('src/index.ts'),
   mode: 'development',
   devtool: false, // 'cheap-source-map',
   output: {
-    clean: true,
+    // clean: true,
     path: root('../main-app/public/mf-assets'), // 将内容直接生成到 main-app/public 下
   },
   resolve: {
-    extensions: ['.tsx', '.ts'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   externals: {
     react: 'React',
+  },
+  optimization: {
+    splitChunks: false,
+
   },
   module: {
     rules: [
@@ -63,7 +67,9 @@ export const buildConfig = () => ({
       },
       // 如果有 MF 依赖，就这样去生成
       remotes: {
-        xxx: `promise window.MFLoader.loadRemoteDep('xxxx', '1.0.0')`,
+        // 'antd':
+        //   'antd@http://localhost:8002/public/mf-assets/antd/5.1.2/bootstrap.js',
+        antd: `promise window.MFLoader.loadRemoteDep('antd', '5.1.2')`,
       },
     }),
   ],

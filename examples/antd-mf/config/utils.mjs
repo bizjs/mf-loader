@@ -15,6 +15,13 @@ export function isDirectory() {
   return fse.statSync(projectDir).isDirectory();
 }
 
+export function readDirFiles(dir) {
+  return fse.readdirSync(dir).filter((name) => {
+    const fullpath = path.join(dir, name);
+    return fse.statSync(fullpath).isFile();
+  });
+}
+
 export function pathJoin(...args) {
   return path.join(...args);
 }
@@ -30,6 +37,12 @@ export function runWebpack(name, opt) {
       console.log(
         `${name} 构建完毕，err=`,
         err,
+        stat.toJson({
+          all: false,
+          errors: true,
+          errorDetails: true,
+          errorsCount: true,
+        }),
         `耗时${(stat.endTime - stat.startTime) / 1000}s`
       );
       resolve(err);

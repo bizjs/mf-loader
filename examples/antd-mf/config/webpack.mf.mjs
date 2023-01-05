@@ -1,26 +1,33 @@
-import { root, runWebpack, readJSONSync } from './utils.mjs';
+import { root, runWebpack, readJSONSync, readDirFiles } from './utils.mjs';
 import ModuleFederationPlugin from 'webpack/lib/container/ModuleFederationPlugin.js';
 
 const pkgJSON = readJSONSync(root('package.json'));
 
 const pkgName = 'antd';
 
+// 所有要打包的组件名
+const componentNames = readDirFiles(root('src/components')).map((x) =>
+  x.replace('.ts', '')
+);
+
 /**
- * @type {import('webpack').Configuration}
+ * @returns {import('webpack').Configuration}
  */
 export const buildConfig = () => ({
-  entry: root('index.ts'),
-  mode: 'development',
+  entry: root('src/index.ts'),
+  mode: 'production',
   devtool: false, // 'cheap-source-map',
   output: {
-    // clean: true,
+    clean: true,
     path: root('../main-app/public/mf-assets'), // 将内容直接生成到 main-app/public 下
+    filename: '[name]_[contenthash:8].js',
   },
   resolve: {
-    extensions: ['.tsx', '.ts'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   externals: {
     react: 'React',
+    'react-dom': 'ReactDOM',
   },
   module: {
     rules: [
@@ -45,6 +52,9 @@ export const buildConfig = () => ({
       // },
     ],
   },
+  optimization: {
+    splitChunks: false,
+  },
   plugins: [
     new ModuleFederationPlugin({
       name: pkgName,
@@ -53,20 +63,14 @@ export const buildConfig = () => ({
         name: ['__MFSharedContainer__', `${pkgName}$${pkgJSON.version}`],
       },
       filename: `${pkgName}/${pkgJSON.version}/bootstrap.js`,
-      exposes: {
-        './Form': {
-          name: `${pkgName}/${pkgJSON.version}/Form`,
-          import: [root('./src/components/Form.ts')],
-        },
-        './Table': {
-          name: `${pkgName}/${pkgJSON.version}/Table`,
-          import: [root('./src/components/Table.ts')],
-        },
-        './Input': {
-          name: `${pkgName}/${pkgJSON.version}/Input`,
-          import: [root('./src/components/Input.ts')],
-        },
-      },
+      exposes: componentNames.reduce((result, cName) => {
+        result[`./${cName}`] = {
+          name: `${pkgName}/${pkgJSON.version}/${cName}`,
+          import: [root(`./src/components/${cName}.ts`)],
+        };
+        return result;
+      }, {}),
+
       // 如果有 MF 依赖，就这样去生成
       // remotes: {
       //   xxx: `promise window.MFLoader.loadRemoteDep('xxxx', '1.0.0')`,
