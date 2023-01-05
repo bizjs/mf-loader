@@ -1,0 +1,19 @@
+{
+  "name": "antd-mf",
+  "version": "5.1.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node config/webpack.mf.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "antd": "5.1.2"
+  },
+  "peerDependencies": {
+    "react": ">16.8",
+    "react-dom": ">16.8"
+  }
+}

@@ -1,19 +1,7 @@
 var __MFSharedContainer__;
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ({
-
-/***/ "react":
-/*!************************!*\
-  !*** external "React" ***!
-  \************************/
-/***/ ((module) => {
-
-module.exports = React;
-
-/***/ })
-
-/******/ 	});
+/******/ 	var __webpack_modules__ = ({});
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
@@ -97,7 +85,7 @@ module.exports = React;
 /******/ 	/* webpack/runtime/load script */
 /******/ 	(() => {
 /******/ 		var inProgress = {};
-/******/ 		var dataWebpackPrefix = "micro-app1:";
+/******/ 		var dataWebpackPrefix = "antd-mf:";
 /******/ 		// loadScript function to load a script via script tag
 /******/ 		__webpack_require__.l = (url, done, key, chunkId) => {
 /******/ 			if(inProgress[url]) { inProgress[url].push(done); return; }
@@ -139,96 +127,14 @@ module.exports = React;
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/remotes loading */
+/******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
-/******/ 		var chunkMapping = {};
-/******/ 		var idToExternalAndNameMapping = {};
-/******/ 		__webpack_require__.f.remotes = (chunkId, promises) => {
-/******/ 			if(__webpack_require__.o(chunkMapping, chunkId)) {
-/******/ 				chunkMapping[chunkId].forEach((id) => {
-/******/ 					var getScope = __webpack_require__.R;
-/******/ 					if(!getScope) getScope = [];
-/******/ 					var data = idToExternalAndNameMapping[id];
-/******/ 					if(getScope.indexOf(data) >= 0) return;
-/******/ 					getScope.push(data);
-/******/ 					if(data.p) return promises.push(data.p);
-/******/ 					var onError = (error) => {
-/******/ 						if(!error) error = new Error("Container missing");
-/******/ 						if(typeof error.message === "string")
-/******/ 							error.message += '\nwhile loading "' + data[1] + '" from ' + data[2];
-/******/ 						__webpack_require__.m[id] = () => {
-/******/ 							throw error;
-/******/ 						}
-/******/ 						data.p = 0;
-/******/ 					};
-/******/ 					var handleFunction = (fn, arg1, arg2, d, next, first) => {
-/******/ 						try {
-/******/ 							var promise = fn(arg1, arg2);
-/******/ 							if(promise && promise.then) {
-/******/ 								var p = promise.then((result) => (next(result, d)), onError);
-/******/ 								if(first) promises.push(data.p = p); else return p;
-/******/ 							} else {
-/******/ 								return next(promise, d, first);
-/******/ 							}
-/******/ 						} catch(error) {
-/******/ 							onError(error);
-/******/ 						}
-/******/ 					}
-/******/ 					var onExternal = (external, _, first) => (external ? handleFunction(__webpack_require__.I, data[0], 0, external, onInitialized, first) : onError());
-/******/ 					var onInitialized = (_, external, first) => (handleFunction(external.get, data[1], getScope, 0, onFactory, first));
-/******/ 					var onFactory = (factory) => {
-/******/ 						data.p = 1;
-/******/ 						__webpack_require__.m[id] = (module) => {
-/******/ 							module.exports = factory();
-/******/ 						}
-/******/ 					};
-/******/ 					handleFunction(__webpack_require__, data[2], 0, 0, onExternal, 1);
-/******/ 				});
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
-/******/ 		}
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/sharing */
-/******/ 	(() => {
-/******/ 		__webpack_require__.S = {};
-/******/ 		var initPromises = {};
-/******/ 		var initTokens = {};
-/******/ 		__webpack_require__.I = (name, initScope) => {
-/******/ 			if(!initScope) initScope = [];
-/******/ 			// handling circular init calls
-/******/ 			var initToken = initTokens[name];
-/******/ 			if(!initToken) initToken = initTokens[name] = {};
-/******/ 			if(initScope.indexOf(initToken) >= 0) return;
-/******/ 			initScope.push(initToken);
-/******/ 			// only runs once
-/******/ 			if(initPromises[name]) return initPromises[name];
-/******/ 			// creates a new share scope if needed
-/******/ 			if(!__webpack_require__.o(__webpack_require__.S, name)) __webpack_require__.S[name] = {};
-/******/ 			// runs all init snippets from all modules reachable
-/******/ 			var scope = __webpack_require__.S[name];
-/******/ 			var warn = (msg) => (typeof console !== "undefined" && console.warn && console.warn(msg));
-/******/ 			var uniqueName = "micro-app1";
-/******/ 			var register = (name, version, factory, eager) => {
-/******/ 				var versions = scope[name] = scope[name] || {};
-/******/ 				var activeVersion = versions[version];
-/******/ 				if(!activeVersion || (!activeVersion.loaded && (!eager != !activeVersion.eager ? eager : uniqueName > activeVersion.from))) versions[version] = { get: factory, from: uniqueName, eager: !!eager };
-/******/ 			};
-/******/ 			var initExternal = (id) => {
-/******/ 				var handleError = (err) => (warn("Initialization of sharing external failed: " + err));
-/******/ 				try {
-/******/ 					var module = __webpack_require__(id);
-/******/ 					if(!module) return;
-/******/ 					var initFn = (module) => (module && module.init && module.init(__webpack_require__.S[name], initScope))
-/******/ 					if(module.then) return promises.push(module.then(initFn, handleError));
-/******/ 					var initResult = initFn(module);
-/******/ 					if(initResult && initResult.then) return promises.push(initResult['catch'](handleError));
-/******/ 				} catch(err) { handleError(err); }
-/******/ 			}
-/******/ 			var promises = [];
-/******/ 			switch(name) {
-/******/ 			}
-/******/ 			if(!promises.length) return initPromises[name] = 1;
-/******/ 			return initPromises[name] = Promise.all(promises).then(() => (initPromises[name] = 1));
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -260,7 +166,7 @@ module.exports = React;
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"micro-app1": 0
+/******/ 			"antd": 0
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.j = (chunkId, promises) => {
@@ -337,25 +243,28 @@ module.exports = React;
 /******/ 		
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkmicro_app1"] = self["webpackChunkmicro_app1"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunkantd_mf"] = self["webpackChunkantd_mf"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry need to be wrapped in an IIFE because it uses a non-standard name for the exports (exports).
 (() => {
 var exports = __webpack_exports__;
 /*!***********************!*\
   !*** container entry ***!
   \***********************/
 var moduleMap = {
-	"./Page1": () => {
-		return __webpack_require__.e(/*! micro-app1/1.0.0/Page1 */ "micro-app1/1.0.0/Page1").then(() => (() => ((__webpack_require__(/*! ./src/Page1/index.tsx */ "./src/Page1/index.tsx")))));
+	"./Form": () => {
+		return __webpack_require__.e(/*! antd/5.1.2/Form */ "antd/5.1.2/Form").then(() => (() => ((__webpack_require__(/*! ./src/components/Form.ts */ "./src/components/Form.ts")))));
 	},
-	"./Page2": () => {
-		return __webpack_require__.e(/*! micro-app1/1.0.0/Page2 */ "micro-app1/1.0.0/Page2").then(() => (() => ((__webpack_require__(/*! ./src/Page2/index.tsx */ "./src/Page2/index.tsx")))));
+	"./Table": () => {
+		return __webpack_require__.e(/*! antd/5.1.2/Table */ "antd/5.1.2/Table").then(() => (() => ((__webpack_require__(/*! ./src/components/Table.ts */ "./src/components/Table.ts")))));
+	},
+	"./Input": () => {
+		return __webpack_require__.e(/*! antd/5.1.2/Input */ "antd/5.1.2/Input").then(() => (() => ((__webpack_require__(/*! ./src/components/Input.ts */ "./src/components/Input.ts")))));
 	}
 };
 var get = (module, getScope) => {
@@ -386,6 +295,6 @@ __webpack_require__.d(exports, {
 });
 })();
 
-(__MFSharedContainer__ = typeof __MFSharedContainer__ === "undefined" ? {} : __MFSharedContainer__)["micro-app1$1.0.0"] = __webpack_exports__;
+(__MFSharedContainer__ = typeof __MFSharedContainer__ === "undefined" ? {} : __MFSharedContainer__)["antd$5.1.2"] = __webpack_exports__;
 /******/ })()
 ;
